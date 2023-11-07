@@ -32,6 +32,9 @@ export INTERNAL_IP
 # Switch to the container's working directory
 cd /home/container || exit 1
 
+# TEMPORARY! Headless/RuntimeData does not exist
+ln -sf /home/container/RuntimeData /home/container/Headless/RuntimeData
+
 # Update Resonite headless
 ./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless -betapassword ${BETA_CODE} +quit
 #./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless +quit
