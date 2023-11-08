@@ -1,0 +1,62 @@
+{
+    "_comment": "DO NOT EDIT: FILE GENERATED AUTOMATICALLY BY PTERODACTYL PANEL - PTERODACTYL.IO",
+    "meta": {
+        "version": "PTDL_v2",
+        "update_url": null
+    },
+    "exported_at": "2023-10-13T06:52:37+11:00",
+    "name": "Resonite Headless",
+    "author": "bredo@voxelbone.cloud",
+    "description": "Resonite Headless Egg from Voxel Bone Cloud",
+    "features": null,
+    "docker_images": {
+        "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main"
+    },
+    "file_denylist": [],
+    "startup": "mono Headless\/Resonite.exe -HeadlessConfig Headless\/Config\/Config.json",
+    "config": {
+        "files": "{}",
+        "startup": "{\r\n    \"done\": \"Headless running\"\r\n}",
+        "logs": "{}",
+        "stop": "shutdown"
+    },
+    "scripts": {
+        "installation": {
+            "script": "#!\/bin\/bash\r\n\r\n# Resonite egg used by Voxel Bone Cloud\r\n# Based on Synk's egg for Neos\r\n## https:\/\/github.com\/Synkstar\/eggs\/blob\/f33be5b714b3655c778fcd7cbaeaa2a36d259d39\/steamcmd_servers\/neosvr\/egg-neos-vr-headless-client.json\r\n\r\ndpkg -add-architecture i386\r\napt update -y\r\napt install curl ca-certificates -y\r\n\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\nmkdir steamapps\r\n\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} +app_update 2519380 -beta headless -betapassword ${BETA_CODE} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n\r\n## Workaround for some funky stuff\r\n\r\n# precreate Headless, Resonite_Data and Migrations\r\nmkdir -p \/mnt\/server\/Headless\r\nmkdir -p \/mnt\/server\/Resonite_Data\r\nmkdir -p \/mnt\/server\/Migrations\r\n\r\ncd \/mnt\/server\/Headless\r\n\r\nln -sf \/home\/container\/Resonite_Data Resonite_Data\r\nln -sf \/home\/container\/Migrations Migrations",
+            "container": "debian:bookworm",
+            "entrypoint": "bash"
+        }
+    },
+    "variables": [
+        {
+            "name": "Steam User",
+            "description": "Steam username",
+            "env_variable": "STEAM_USER",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Password",
+            "description": "Steam User Password",
+            "env_variable": "STEAM_PASSWORD",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:128",
+            "field_type": "text"
+        },
+        {
+            "name": "Beta Password",
+            "description": "Beta password",
+            "env_variable": "BETA_CODE",
+            "default_value": "",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:30",
+            "field_type": "text"
+        }
+    ]
+}
