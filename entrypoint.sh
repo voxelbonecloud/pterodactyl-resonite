@@ -35,6 +35,24 @@ cd /home/container || exit 1
 # Update Resonite headless
 ./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless -betapassword ${BETA_CODE} +quit
 #./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless +quit
+
+# Cumulo
+# we probably don't need to do this every time the headless starts but we ball
+
+rm -r /home/container/cumulotemp/*
+
+cd /home/container/cumulotemp/
+curl -SslL https://github.com/RileyGuy/Cumulo/releases/latest/download/Cumulo_Patcher.zip -o /home/container/cumulotemp/Cumulo_Patcher.zip
+
+mkdir -p /home/container/cumulotemp/cumulo
+unzip /home/container/cumulotemp/Cumulo_Patcher.zip -d /home/container/cumulotemp/cumulo
+
+cd /home/container/cumulotemp/cumulo
+
+mono Cumulo.exe /home/container/Headless --noconfirm
+
+cd /home/container/Headless
+
 # Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
 # variable format of "${VARIABLE}" before evaluating the string and automatically
 # replacing the values.
