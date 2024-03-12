@@ -5,11 +5,10 @@ LABEL 	author="bredo" maintainer="bredo@voxelbone.cloud"
 RUN 	apt update && apt upgrade -y \
 	&& dpkg --add-architecture i386\
 	&& apt install -y apt-transport-https dirmngr gnupg ca-certificates iproute2 unzip sqlite3 fontconfig lib32gcc-s1 curl \
-	&& export GNUPGHOME=$(mktemp -d)\
-	&& gpg --recv-keys --no-default-keyring --keyring /etc/apt/trusted.gpg.d/mono-keyring.gpg --keyserver keyserver.ubuntu.com 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-	&& echo "deb [signed-by=/etc/apt/trusted.gpg.d/mono-keyring.gpg] https://download.mono-project.com/repo/debian stable-buster main" > /etc/apt/sources.list.d/mono-official-stable.list \
+ 	&& curl -SslL -o /tmp/packages-microsoft-prod.deb https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb \
+  	&& yes | dpkg -i /tmp/packages-microsoft-prod.deb \
 	&& apt update \
-	&& apt install -y mono-complete \ 
+	&& apt install -y mono-complete dotnet-sdk-8.0 \ 
 	&& useradd -m -d /home/container -s /bin/bash container
 
 USER 	container
