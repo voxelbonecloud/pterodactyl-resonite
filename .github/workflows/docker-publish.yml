@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: test
         run: echo ${{ github.repository }}
+      - name: tags
+        run: echo ${{ github.ref_name }}
       #- name: Checkout
       #  uses: actions/checkout@v4
       #- name: Log in to Docker
