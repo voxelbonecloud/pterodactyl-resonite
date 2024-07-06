@@ -1,15 +1,10 @@
-FROM	debian:bookworm	
+FROM	ghcr.io/voxelbonecloud/debian-mono:main	
 
-LABEL 	author="bredo" maintainer="bredo@voxelbone.cloud"
+LABEL 	author="Voxel Bone Cloud" maintainer="github@voxelbone.cloud"
 
-RUN 	apt update && apt upgrade -y \
+RUN 	apt update \
 	&& dpkg --add-architecture i386\
-	&& apt install -y apt-transport-https dirmngr gnupg ca-certificates iproute2 unzip sqlite3 fontconfig lib32gcc-s1 curl \
-	&& export GNUPGHOME=$(mktemp -d)\
-	&& gpg --recv-keys --no-default-keyring --keyring /etc/apt/trusted.gpg.d/mono-keyring.gpg --keyserver keyserver.ubuntu.com 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF \
-	&& echo "deb [signed-by=/etc/apt/trusted.gpg.d/mono-keyring.gpg] https://download.mono-project.com/repo/debian stable-buster main" > /etc/apt/sources.list.d/mono-official-stable.list \
-	&& apt update \
-	&& apt install -y mono-complete \ 
+	&& apt install lib32gcc-s1 -y \
 	&& useradd -m -d /home/container -s /bin/bash container
 
 USER 	container
