@@ -10,7 +10,7 @@
     "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
     "features": null,
     "docker_images": {
-        "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:dotnet": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:dotnet"
+        "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main"
     },
     "file_denylist": [],
     "startup": "dotnet Headless\/net8.0\/Resonite.dll -HeadlessConfig Config\/{{CONFIG_FILENAME}} -Logs Logs\/",
