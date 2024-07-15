@@ -4,10 +4,10 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-07-12T21:00:40+12:00",
+    "exported_at": "2024-07-16T11:12:47+12:00",
     "name": "Resonite Headless",
     "author": "bredo@voxelbone.cloud",
-    "description": "The Resonite Headless",
+    "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
     "features": null,
     "docker_images": {
         "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:dotnet": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:dotnet"
