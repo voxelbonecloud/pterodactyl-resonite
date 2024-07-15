@@ -13,7 +13,7 @@
         "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main"
     },
     "file_denylist": [],
-    "startup": "dotnet Headless\/net8.0\/Resonite.dll -HeadlessConfig Config\/{{CONFIG_FILENAME}} -Logs Logs\/",
+    "startup": "dotnet Headless\/Resonite.dll -HeadlessConfig Config\/{{CONFIG_FILENAME}} -Logs Logs\/",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"World running...\"\r\n}",
