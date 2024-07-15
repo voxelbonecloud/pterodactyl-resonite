@@ -1,10 +1,10 @@
-FROM	ghcr.io/voxelbonecloud/debian-mono:main	
+FROM	ghcr.io/voxelbonecloud/debian-dotnet:main	
 
 LABEL 	author="Voxel Bone Cloud" maintainer="github@voxelbone.cloud"
 
 RUN 	apt update \
 	&& dpkg --add-architecture i386\
-	&& apt install lib32gcc-s1 -y \
+	&& apt install lib32gcc-s1 libfreetype6 mono-complete -y \
 	&& useradd -m -d /home/container -s /bin/bash container
 
 USER 	container

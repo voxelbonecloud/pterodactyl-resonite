@@ -4,43 +4,43 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2023-10-13T06:52:37+11:00",
+    "exported_at": "2024-07-16T11:12:47+12:00",
     "name": "Resonite Headless",
     "author": "bredo@voxelbone.cloud",
-    "description": "Resonite Headless Egg from Voxel Bone Cloud",
+    "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
     "features": null,
     "docker_images": {
         "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main"
     },
     "file_denylist": [],
-    "startup": "mono Headless\/Resonite.exe -HeadlessConfig Headless\/Config\/Config.json",
+    "startup": "dotnet Headless\/Resonite.dll -HeadlessConfig Config\/{{CONFIG_FILENAME}} -Logs Logs\/",
     "config": {
         "files": "{}",
-        "startup": "{\r\n    \"done\": \"Headless running\"\r\n}",
+        "startup": "{\r\n    \"done\": \"World running...\"\r\n}",
         "logs": "{}",
         "stop": "shutdown"
     },
     "scripts": {
         "installation": {
-            "script": "#!\/bin\/bash\r\n\r\n# Resonite egg used by Voxel Bone Cloud\r\n# Based on Synk's egg for Neos\r\n## https:\/\/github.com\/Synkstar\/eggs\/blob\/f33be5b714b3655c778fcd7cbaeaa2a36d259d39\/steamcmd_servers\/neosvr\/egg-neos-vr-headless-client.json\r\n\r\ndpkg -add-architecture i386\r\napt update -y\r\napt install curl ca-certificates -y\r\n\r\ncd \/tmp\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncurl -sSL -o steamcmd.tar.gz https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz\r\ntar -xzvf steamcmd.tar.gz -C \/mnt\/server\/steamcmd\r\n\r\ncd \/mnt\/server\/steamcmd\r\n\r\nchown -R root:root \/mnt\r\nexport HOME=\/mnt\/server\r\nmkdir steamapps\r\n\r\n.\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} +app_update 2519380 -beta headless -betapassword ${BETA_CODE} validate +quit\r\n\r\n## set up 32 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk32\r\ncp -v linux32\/steamclient.so ..\/.steam\/sdk32\/steamclient.so\r\n\r\n## set up 64 bit libraries\r\nmkdir -p \/mnt\/server\/.steam\/sdk64\r\ncp -v linux64\/steamclient.so ..\/.steam\/sdk64\/steamclient.so\r\n\r\n\r\n## Workaround for some funky stuff\r\n\r\n# precreate Headless, Resonite_Data and Migrations\r\nmkdir -p \/mnt\/server\/Headless\r\nmkdir -p \/mnt\/server\/Resonite_Data\r\nmkdir -p \/mnt\/server\/Migrations\r\n\r\ncd \/mnt\/server\/Headless\r\n\r\nln -sf \/home\/container\/Resonite_Data Resonite_Data\r\nln -sf \/home\/container\/Migrations Migrations",
+            "script": "#!\/bin\/bash\r\n\r\n# Resonite Headless install script\r\n# Copyright 2024 Voxel Bone Cloud.\r\n\r\n# Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \u201cSoftware\u201d), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and\/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\r\n\r\n#THE SOFTWARE IS PROVIDED \u201cAS IS\u201d, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\r\n\r\n# Create extra directories used by the headless\r\nmkdir -p \/mnt\/server\/Config\r\nmkdir -p \/mnt\/server\/Logs\r\n\r\n# Create basic config\r\necho -e \\\r\n'{\r\n    \"$schema\": \"https:\/\/raw.githubusercontent.com\/Yellow-Dog-Man\/JSONSchemas\/main\/schemas\/HeadlessConfig.schema.json\",\r\n    \"loginCredential\": null,\r\n    \"loginPassword\": null,\r\n    \"startWorlds\": [\r\n    {\r\n      \"isEnabled\": true,\r\n      \"sessionName\": null,\r\n      \"accessLevel\": \"Anyone\",\r\n      \"loadWorldURL\": null,\r\n      \"loadWorldPresetName\": \"Grid\"\r\n    }\r\n  ]\r\n}' > \/mnt\/server\/Config\/Config.json \r\n\r\n# Make sure we have some dependencies installed\r\ndpkg --add-architecture i386\r\napt update\r\napt install curl lib32gcc-s1 -y\r\n\r\n# Download SteamCMD\r\nmkdir -p \/mnt\/server\/steamcmd\r\ncd \/mnt\/server\/steamcmd\r\ncurl -sqL https:\/\/steamcdn-a.akamaihd.net\/client\/installer\/steamcmd_linux.tar.gz | tar zxvf -\r\n\r\n\/mnt\/server\/steamcmd\/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} +force_install_dir \/mnt\/server\/ +app_update 2519830 -beta headless -betapassword ${BETA_CODE} +quit",
             "container": "debian:bookworm",
             "entrypoint": "bash"
         }
     },
     "variables": [
         {
-            "name": "Steam User",
-            "description": "Steam username",
+            "name": "Steam Username",
+            "description": "Your Steam username",
             "env_variable": "STEAM_USER",
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:20",
+            "rules": "required|string|max:128",
             "field_type": "text"
         },
         {
             "name": "Steam Password",
-            "description": "Steam User Password",
+            "description": "Your Steam password",
             "env_variable": "STEAM_PASSWORD",
             "default_value": "",
             "user_viewable": false,
@@ -49,13 +49,23 @@
             "field_type": "text"
         },
         {
-            "name": "Beta Password",
-            "description": "Beta password",
+            "name": "Steam Beta Code",
+            "description": "The Steam Beta Code obtained through sending \/headlessCode to the Resonite bot",
             "env_variable": "BETA_CODE",
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:30",
+            "rules": "required|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Config File Name",
+            "description": "The name of your Config file",
+            "env_variable": "CONFIG_FILENAME",
+            "default_value": "Config.json",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "required|string|max:32",
             "field_type": "text"
         }
     ]
