@@ -33,7 +33,7 @@ export INTERNAL_IP
 cd /home/container || exit 1
 
 # Update Resonite headless
-./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless -betapassword ${BETA_CODE} +quit
+./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless -betapassword ${BETA_CODE} +validate +quit
 #./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless +quit
 # Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
 # variable format of "${VARIABLE}" before evaluating the string and automatically
