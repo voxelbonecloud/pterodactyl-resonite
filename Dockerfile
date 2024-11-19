@@ -1,4 +1,4 @@
-FROM	ghcr.io/voxelbonecloud/debian-dotnet:main	
+FROM	mcr.microsoft.com/dotnet/runtime:8.0-bookworm-slim
 
 LABEL 	author="Voxel Bone Cloud" maintainer="github@voxelbone.cloud"
 
