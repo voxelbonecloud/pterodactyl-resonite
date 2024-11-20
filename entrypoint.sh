@@ -48,10 +48,6 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
 	mkdir -p ${HEADLESS_DIRECTORY}/rml_libs
 	mkdir -p ${HEADLESS_DIRECTORY}/rml_config
 
-	# we do this so we can access the mod directories from the root directory
-	#ln -sf ${HEADLESS_DIRECTORY}/rml_mods /home/container/rml_mods
-	#ln -sf ${HEADLESS_DIRECTORY}/rml_config /home/container/rml_config
-
 	# Download ResoniteModLoader
 	echo "Downloading ResoniteModLoader and 0Harmony"
 	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/0Harmony-Net8.dll -o ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net8.dll
