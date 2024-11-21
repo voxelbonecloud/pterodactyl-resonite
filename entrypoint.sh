@@ -54,9 +54,14 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
   	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/ResoniteModLoader.dll -o ${HEADLESS_DIRECTORY}/Libraries/ResoniteModLoader.dll
 
 	# Install mods
-	if [ "${MOD_PROMETHEUS}" = "true" ] || [ "$MOD_PROMETHEUS" = "1" ]; then
+	if [ "${MOD_PROMETHEUS}" = "1" ]; then
 		echo "Installing HeadlessPrometheusExporter by J4"
 		curl -SslL https://i.j4.lc/resonite/mods/latest/HeadlessPrometheusExporter.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessPrometheusExporter.dll
+	fi
+
+	if  [ "$MOD_HEADLESSTWEAKS" = "1" ]; then
+		echo "Installing HeadlessTweaks by New_Project_Final_Final_WIP"
+		curl -SslL https://github.com/New-Project-Final-Final-WIP/HeadlessTweaks/releases/latest/download/HeadlessTweaks.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessTweaks.dll
 	fi
 
 fi 
