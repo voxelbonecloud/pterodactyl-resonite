@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-07-16T11:12:47+12:00",
+    "exported_at": "2024-11-21T01:42:22+00:00",
     "name": "Resonite Headless",
     "author": "bredo@voxelbone.cloud",
     "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
@@ -13,7 +13,7 @@
         "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main": "ghcr.io\/voxelbonecloud\/pterodactyl-resonite:main"
     },
     "file_denylist": [],
-    "startup": "dotnet Headless\/Resonite.dll -HeadlessConfig Config\/{{CONFIG_FILENAME}} -Logs Logs\/",
+    "startup": "dotnet Headless\/Resonite.dll -HeadlessConfig Config\/{{CONFIG_FILENAME}} -Logs Logs\/ $(if [ \"${ENABLE_MODS}\" = \"1\" ]; then echo \"-LoadAssembly Libraries\/ResoniteModLoader.dll\"; fi)",
     "config": {
         "files": "{}",
         "startup": "{\r\n    \"done\": \"World running...\"\r\n}",
@@ -66,6 +66,36 @@
             "user_viewable": true,
             "user_editable": true,
             "rules": "required|string|max:32",
+            "field_type": "text"
+        },
+        {
+            "name": "Enable ResoniteModLoader",
+            "description": "Enables ResoniteModLoader",
+            "env_variable": "ENABLE_MODS",
+            "default_value": "false",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "MOD_PROMETHEUS",
+            "description": "Add Prometheus exporter (Requires ResoniteModLoader)",
+            "env_variable": "MOD_PROMETHEUS",
+            "default_value": "false",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Install HeadlessTweaks",
+            "description": "Automatically installs the HeadlessTweaks mod (Requires ResoniteModLoader)",
+            "env_variable": "MOD_HEADLESSTWEAKS",
+            "default_value": "0",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "boolean|max:20",
             "field_type": "text"
         }
     ]

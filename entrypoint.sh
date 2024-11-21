@@ -35,6 +35,37 @@ cd /home/container || exit 1
 # Update Resonite headless
 ./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless -betapassword ${BETA_CODE} validate +quit
 #./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless +quit
+
+# Modding stuff
+HEADLESS_DIRECTORY="/home/container"
+
+if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
+	echo "Mods are enabled."
+
+	mkdir -p ${HEADLESS_DIRECTORY}/Libraries
+
+	mkdir -p ${HEADLESS_DIRECTORY}/rml_mods
+	mkdir -p ${HEADLESS_DIRECTORY}/rml_libs
+	mkdir -p ${HEADLESS_DIRECTORY}/rml_config
+
+	# Download ResoniteModLoader
+	echo "Downloading ResoniteModLoader and 0Harmony"
+	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/0Harmony-Net8.dll -o ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net8.dll
+  	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/ResoniteModLoader.dll -o ${HEADLESS_DIRECTORY}/Libraries/ResoniteModLoader.dll
+
+	# Install mods
+	if [ "${MOD_PROMETHEUS}" = "1" ]; then
+		echo "Installing HeadlessPrometheusExporter by J4"
+		curl -SslL https://i.j4.lc/resonite/mods/latest/HeadlessPrometheusExporter.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessPrometheusExporter.dll
+	fi
+
+	if  [ "$MOD_HEADLESSTWEAKS" = "1" ]; then
+		echo "Installing HeadlessTweaks by New_Project_Final_Final_WIP"
+		curl -SslL https://github.com/New-Project-Final-Final-WIP/HeadlessTweaks/releases/latest/download/HeadlessTweaks.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessTweaks.dll
+	fi
+
+fi 
+
 # Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
 # variable format of "${VARIABLE}" before evaluating the string and automatically
 # replacing the values.
