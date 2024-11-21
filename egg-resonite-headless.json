@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-11-21T01:42:22+00:00",
+    "exported_at": "2024-11-21T02:17:03+00:00",
     "name": "Resonite Headless",
     "author": "bredo@voxelbone.cloud",
     "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
@@ -72,9 +72,9 @@
             "name": "Enable ResoniteModLoader",
             "description": "Enables ResoniteModLoader",
             "env_variable": "ENABLE_MODS",
-            "default_value": "false",
-            "user_viewable": false,
-            "user_editable": false,
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean|max:20",
             "field_type": "text"
         },
@@ -82,9 +82,9 @@
             "name": "MOD_PROMETHEUS",
             "description": "Add Prometheus exporter (Requires ResoniteModLoader)",
             "env_variable": "MOD_PROMETHEUS",
-            "default_value": "false",
-            "user_viewable": false,
-            "user_editable": false,
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean|max:20",
             "field_type": "text"
         },
@@ -93,8 +93,8 @@
             "description": "Automatically installs the HeadlessTweaks mod (Requires ResoniteModLoader)",
             "env_variable": "MOD_HEADLESSTWEAKS",
             "default_value": "0",
-            "user_viewable": false,
-            "user_editable": false,
+            "user_viewable": true,
+            "user_editable": true,
             "rules": "boolean|max:20",
             "field_type": "text"
         }
