@@ -56,8 +56,7 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
 	# Install mods
 	if [ "${MOD_PROMETHEUS}" = "1" ]; then
 		echo "Installing HeadlessPrometheusExporter by J4"
-		#curl -SslL https://i.j4.lc/resonite/mods/latest/HeadlessPrometheusExporter.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessPrometheusExporter.dll
-  		curl -SslL https://g.j4.lc/general-stuff/resonite/headless-prometheus-exporter/-/releases/1.2.1/downloads/HeadlessPrometheusExporter.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessPrometheusExporter.dll
+		curl -SslL https://i.j4.lc/resonite/mods/latest/HeadlessPrometheusExporter.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessPrometheusExporter.dll
 	fi
 
 	if  [ "$MOD_HEADLESSTWEAKS" = "1" ]; then
