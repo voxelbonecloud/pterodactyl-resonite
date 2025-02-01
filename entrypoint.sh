@@ -64,6 +64,11 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
 		curl -SslL https://github.com/New-Project-Final-Final-WIP/HeadlessTweaks/releases/latest/download/HeadlessTweaks.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessTweaks.dll
 	fi
 
+	if [ "$MOD_HEADLESSUSERCULLING" = "1" ]; then
+		echo "Installing HeadlessUserCulling by Raidriar"
+		curl -SslL https://github.com/Raidriar796/HeadlessUserCulling/releases/latest/download/HeadlessUserCulling.dll -o ${HEADLESS_DIRECTORY}/rml_mods/HeadlessUserCulling.dll
+	fi
+
 fi 
 
 # Convert all of the "{{VARIABLE}}" parts of the command into the expected shell
