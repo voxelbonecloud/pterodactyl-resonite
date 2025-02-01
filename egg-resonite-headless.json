@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2024-11-21T02:17:03+00:00",
+    "exported_at": "2025-02-01T12:36:54+11:00",
     "name": "Resonite Headless",
     "author": "bredo@voxelbone.cloud",
     "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
@@ -92,6 +92,16 @@
             "name": "Install HeadlessTweaks",
             "description": "Automatically installs the HeadlessTweaks mod (Requires ResoniteModLoader)",
             "env_variable": "MOD_HEADLESSTWEAKS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean|max:20",
+            "field_type": "text"
+        },
+        {
+            "name": "Install HeadlessUserCulling",
+            "description": "Automatically installs the HeadlessUserCulling mod (Requires ResoniteModLoader)",
+            "env_variable": "MOD_HEADLESSUSERCULLING",
             "default_value": "0",
             "user_viewable": true,
             "user_editable": true,
