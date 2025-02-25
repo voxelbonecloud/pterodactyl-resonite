@@ -107,6 +107,16 @@
             "user_editable": true,
             "rules": "boolean|max:20",
             "field_type": "text"
+        },
+        {
+            "name": "Install StresslessHeadless",
+            "description": "Automatically installs the StresslessHeadless mod (Requires ResoniteModLoader)",
+            "env_variable": "MOD_STRESSLESSHEADLESS",
+            "default_value": "0",
+            "user_viewable": true,
+            "user_editable": true,
+            "rules": "boolean|max:20",
+            "field_type": "text"
         }
     ]
 }
