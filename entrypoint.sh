@@ -70,7 +70,7 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
 	fi
 
 	if [ "$MOD_STRESSLESSHEADLESS" = "1" ]; then
-		echo "Installing StresslessHeadless by Raidriar796"
+		echo "Installing StresslessHeadless by Raidriar"
 		curl -SslL https://github.com/Raidriar796/StresslessHeadless/releases/latest/download/StresslessHeadless.dll -o ${HEADLESS_DIRECTORY}/rml_mods/StresslessHeadless.dll
 	fi
 
