@@ -50,8 +50,14 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
 
 	# Download ResoniteModLoader
 	echo "Downloading ResoniteModLoader and 0Harmony"
-	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/0Harmony-Net8.dll -o ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net8.dll
-  	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/ResoniteModLoader.dll -o ${HEADLESS_DIRECTORY}/Libraries/ResoniteModLoader.dll
+
+	# Make sure we don't have older versions of 0Harmony
+	rm ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net8.dll
+	rm ${HEADLESS_DIRECTORY}/rml_libs/0Harmony.dll
+
+	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/0Harmony-Net9.dll -o ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net9.dll
+
+	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/ResoniteModLoader.dll -o ${HEADLESS_DIRECTORY}/Libraries/ResoniteModLoader.dll
 
 	# Install mods
 	if [ "${MOD_PROMETHEUS}" = "1" ]; then
