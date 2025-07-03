@@ -33,8 +33,19 @@ export TZ
 cd /home/container || exit 1
 
 # Update Resonite headless
-./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_license_request 2519830 +app_update 2519830 -beta headless -betapassword ${BETA_CODE} validate +quit
-#./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_update 2519830 -beta headless +quit
+STEAMCMD_BETA_PASSWORD=""
+if [ ! "${BETA_CODE}" = "" ]; then
+	STEAMCMD_BETA_PASSWORD="-betapassword ${BETA_CODE}"
+fi
+
+# Handle if we have no Steam branch
+# - we will run into this with people using older eggs
+if [ "${STEAM_BRANCH}" = "" ]; then
+	echo "Manually adding Steam branch!"
+	STEAM_BRANCH="headless"
+fi
+
+./steamcmd/steamcmd.sh +login ${STEAM_USER} ${STEAM_PASSWORD} ${STEAM_AUTH} +force_install_dir /home/container +app_license_request 2519830 +app_update 2519830 -beta ${STEAM_BRANCH} ${STEAMCMD_BETA_PASSWORD} validate +quit
 
 # Modding stuff
 HEADLESS_DIRECTORY="/home/container"
