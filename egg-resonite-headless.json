@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": null
     },
-    "exported_at": "2025-03-04T07:54:47+11:00",
+    "exported_at": "2025-07-04T09:27:54+12:00",
     "name": "Resonite Headless",
     "author": "bredo@voxelbone.cloud",
     "description": "Resonite Headless Egg, published by Voxel Bone Cloud",
@@ -55,7 +55,17 @@
             "default_value": "",
             "user_viewable": false,
             "user_editable": false,
-            "rules": "required|string|max:64",
+            "rules": "nullable|string|max:64",
+            "field_type": "text"
+        },
+        {
+            "name": "Steam Branch",
+            "description": "The Steam branch to be downloaded from",
+            "env_variable": "STEAM_BRANCH",
+            "default_value": "headless",
+            "user_viewable": false,
+            "user_editable": false,
+            "rules": "required|string|max:32",
             "field_type": "text"
         },
         {
