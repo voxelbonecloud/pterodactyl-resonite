@@ -64,9 +64,9 @@ if [ "${ENABLE_MODS}" = "true" ] || [ "${ENABLE_MODS}" = "1" ]; then
 
 	# Make sure we don't have older versions of 0Harmony
 	rm ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net8.dll
-	rm ${HEADLESS_DIRECTORY}/rml_libs/0Harmony.dll
+	rm ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net9.dll
 
-	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/0Harmony-Net9.dll -o ${HEADLESS_DIRECTORY}/rml_libs/0Harmony-Net9.dll
+	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/0Harmony.dll -o ${HEADLESS_DIRECTORY}/rml_libs/0Harmony.dll
 	curl -SslL https://github.com/resonite-modding-group/ResoniteModLoader/releases/latest/download/ResoniteModLoader.dll -o ${HEADLESS_DIRECTORY}/Libraries/ResoniteModLoader.dll
 
 	# Install mods
