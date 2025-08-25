@@ -1,10 +1,16 @@
-FROM	mcr.microsoft.com/dotnet/runtime:9.0-bookworm-slim
+FROM	debian:trixie-slim
 
 LABEL 	author="Voxel Bone Cloud" maintainer="github@voxelbone.cloud"
 
 RUN 	apt update \
+	&& apt install curl -y \
+	&& curl https://packages.microsoft.com/config/debian/12/packages-microsoft-prod.deb -o /tmp/packages-microsoft-prod.deb \
+	&& dpkg -i /tmp/packages-microsoft-prod.deb \
+	&& rm /tmp/packages-microsoft-prod.deb \
 	&& dpkg --add-architecture i386 \
-	&& apt install lib32gcc-s1 libfreetype6 curl -y \
+	&& apt update \
+	&& apt install lib32gcc-s1 libfreetype6 dotnet-runtime-9.0 -y \
+	&& rm -r /var/lib/apt/lists/* \
 	&& useradd -m -d /home/container -s /bin/bash container
 
 USER 	container
