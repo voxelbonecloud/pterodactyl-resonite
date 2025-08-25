@@ -9,7 +9,7 @@ RUN 	apt update \
 	&& rm /tmp/packages-microsoft-prod.deb \
 	&& dpkg --add-architecture i386 \
 	&& apt update \
-	&& apt install lib32gcc-s1 libfreetype6 dotnet-runtime-9.0 -y \
+	&& apt install lib32gcc-s1 libfreetype6 dotnet-runtime-9.0 libcurl4-openssl-dev:i386 -y \
 	&& rm -r /var/lib/apt/lists/* \
 	&& useradd -m -d /home/container -s /bin/bash container
 
